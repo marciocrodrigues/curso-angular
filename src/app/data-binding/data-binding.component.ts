@@ -10,18 +10,13 @@ export class DataBindingComponent implements OnInit {
   url: string = 'http://loiane.com';
   cursoAngular: boolean = true;
   urlImagem: string = 'https://picsum.photos/id/237/200/300';
-  article: string = 'two-way-binding'
+  article: string = 'input-output-properties';
   valorAtual: string = '';
   valorSalvo: string = '';
   valorFocus: string = '';
   isMouseOver: boolean = false;
 
-  nome: string = 'abc';
-
-  pessoa: any = {
-    nome: 'def',
-    idade: 20
-  };
+  nomeDoCurso: string = 'Angular';
 
   getValor() {
     return 1;
