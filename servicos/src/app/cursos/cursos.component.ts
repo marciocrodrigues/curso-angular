@@ -19,6 +19,10 @@ export class CursosComponent implements OnInit {
 
   ngOnInit(): void {
     this.cursos = this.cursosService.getCursos();
+
+    CursosService.criouNovoCurso.subscribe(
+      cursoCriado => this.cursos.push(cursoCriado)
+    );
   }
 
 }

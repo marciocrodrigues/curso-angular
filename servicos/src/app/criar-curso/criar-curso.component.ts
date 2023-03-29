@@ -14,12 +14,11 @@ export class CriarCursoComponent implements OnInit {
   constructor(private cursosService: CursosService) { }
 
   ngOnInit(): void {
-    this.cursosService.setCursos('TESTE');
     this.cursos = this.cursosService.getCursos();
   }
 
   onAddCurso(curso: string) {
-    this.cursosService.setCursos(curso);
+    this.cursosService.addCursos(curso);
   }
 
 }
