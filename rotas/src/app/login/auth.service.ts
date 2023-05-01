@@ -23,4 +23,8 @@ export class AuthService {
       this.mostrarMenuEmitter.emit(false);
     }
   }
+
+  usuarioAutenticado() {
+    return this.usuarioAltenticado;
+  }
 }
