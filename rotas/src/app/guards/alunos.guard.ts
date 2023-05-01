@@ -14,8 +14,6 @@ export class AlunosGuard implements CanActivateChild {
         childRoute: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-        console.log(childRoute);
-        console.log(state);
         return true;
     }
 }
