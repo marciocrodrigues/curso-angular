@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-template-form',
@@ -27,6 +28,24 @@ export class TemplateFormComponent implements OnInit {
   onSubmit(form: any) {
     console.log(form)
     console.log(this.usuario)
+  }
+
+  verificarValidTouched(campo: NgModel, tipoErro: string = '') {
+
+    if (!this.validarIsNullUndefinedEmpty(tipoErro)) {
+      return !campo.valid && campo.touched && campo.errors?.[tipoErro];
+    } else {
+      return !campo.valid && campo.touched;
+    }
+  }
+
+  validarIsNullUndefinedEmpty(valor: any) {
+    
+    if (typeof valor === 'string'){
+      return  valor === undefined || valor === null || valor.length === 0;
+    } else {
+      return valor === undefined || valor === null;
+    }
   }
 
 }
