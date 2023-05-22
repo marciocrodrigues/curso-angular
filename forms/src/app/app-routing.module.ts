@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DataFormComponent } from './data-form/data-form.component';
 import { TemplateFormComponent } from './template-form/template-form.component';
@@ -6,7 +6,7 @@ import { TemplateFormComponent } from './template-form/template-form.component';
 const routes: Routes = [
   { path: 'templateForm', component: TemplateFormComponent },
   { path: 'dataForm', component: DataFormComponent},
-  { path: '', redirectTo: 'templateForm', pathMatch: 'full'}
+  { path: '', redirectTo: 'dataForm', pathMatch: 'full'}
 ];
 
 @NgModule({

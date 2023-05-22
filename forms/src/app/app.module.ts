@@ -3,21 +3,23 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DataFormComponent } from './data-form/data-form.component';
-import { FormsModule } from '@angular/forms';
+import { DataFormModule } from './data-form/data-form.module';
+import { SharedModule } from './shared/shared.module';
 import { TemplateFormModule } from './template-form/template-form.module';
 @NgModule({
   declarations: [
-    AppComponent,
-    DataFormComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
+    SharedModule,
+    DataFormModule,
     TemplateFormModule
   ],
-  providers: [],
+  exports: [
+    SharedModule
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

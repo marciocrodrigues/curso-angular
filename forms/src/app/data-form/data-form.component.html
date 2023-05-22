@@ -1,1 +1,105 @@
-<p>data-form works!</p>
+<div class="container">
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+        <div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="nome">Nome</label>
+                    <input type="text"
+                        formControlName="nome"
+                        class="form-control"
+                    class="form-control" id="nome" placeholder="Nome" name="nome" required>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control"
+                        formControlName="email"
+                        id="email" placeholder="nome@email.com" name="email" required email>
+                </div>
+            </div>
+
+
+<!--    
+            <div ngModelGroup="endereco">
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="cep">CEP</label>
+                        <input type="text" 
+                            [ngClass]="verificarValidTouched(cep) ? 'form-control is-invalid' : 'form-control'"
+                            id="cep" placeholder="cep" name="cep" [(ngModel)]="usuario.cep" (blur)="consultaCEP($any($event.target).value, f)"
+                            required
+                            #cep="ngModel">
+                        <app-campo-control-erro [mostrarErro]="verificarValidTouched(cep, 'required')" [msgErro]="'CEP é inválido'" [erroNaoRequired]="true" ></app-campo-control-erro>
+                    </div>
+                
+                    <div class="form-group col-md-4">
+                        <label for="numero">Número</label>
+                        <input type="text" 
+                            [ngClass]="verificarValidTouched(numero) ? 'form-control is-invalid' : 'form-control'"
+                            id="numero" placeholder="numero" name="numero" [(ngModel)]="usuario.numero"
+                            required
+                            #numero="ngModel">
+                        <app-campo-control-erro [mostrarErro]="verificarValidTouched(numero, 'required')" [msgErro]="'Número é inválido'" [erroNaoRequired]="true" ></app-campo-control-erro>
+                    </div>
+                
+                    <div class="form-group col-md-4">
+                        <label for="complemento">Complemento</label>
+                        <input type="text" 
+                            [ngClass]="verificarValidTouched(complemento) ? 'form-control is-invalid' : 'form-control'"
+                            id="complemento" placeholder="complemento" name="complemento" [(ngModel)]="usuario.complemento"
+                            required
+                            #complemento="ngModel">
+                        <app-campo-control-erro [mostrarErro]="verificarValidTouched(complemento, 'required')" [msgErro]="'Complemento é inválido'" [erroNaoRequired]="true" ></app-campo-control-erro>
+                    </div>
+                </div>
+            
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="rua">Rua</label>
+                        <input type="text"
+                            class="form-control readonly" id="rua" placeholder="rua" name="rua" [(ngModel)]="usuario.rua"
+                            #rua="ngModel" readonly required>
+                        <app-campo-control-erro [mostrarErro]="verificarValidTouched(rua, 'required')" [msgErro]="'Rua é inválido'" [erroNaoRequired]="true" ></app-campo-control-erro>
+                    </div>                
+                </div>
+            
+                <div class="row">
+                    <div class="form-group col-md-5">
+                        <label for="bairro">Bairro</label>
+                        <input type="text"
+                            class="form-control readonly" id="bairro" placeholder="bairro" name="bairro" [(ngModel)]="usuario.bairro"
+                            #bairro="ngModel" readonly required>
+                        <app-campo-control-erro [mostrarErro]="verificarValidTouched(bairro, 'required')" [msgErro]="'Bairro é inválido'" [erroNaoRequired]="true" ></app-campo-control-erro>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="cidade">Cidade</label>
+                        <input type="text"
+                            class="form-control readonly" id="cidade" placeholder="cidade" name="cidade" [(ngModel)]="usuario.cidade"
+                            #cidade="ngModel" readonly required>
+                        <app-campo-control-erro [mostrarErro]="verificarValidTouched(cidade, 'required')" [msgErro]="'Bairro é inválido'" [erroNaoRequired]="true" ></app-campo-control-erro>
+                    </div>
+                
+                    <div class="form-group col-md-3">
+                        <label for="estado">Estado</label>
+                        <input type="text"
+                            class="form-control readonly" id="estado" placeholder="estado" name="estado" [(ngModel)]="usuario.estado"
+                            #estado="ngModel" readonly required>
+                        <app-campo-control-erro [mostrarErro]="verificarValidTouched(estado, 'required')" [msgErro]="'Estado é inválido'" [erroNaoRequired]="true" ></app-campo-control-erro>
+                    </div>
+                </div>
+     -->    
+            <div style="margin-top: 15px;">
+                <button type="submit" class="btn btn-primary" [disabled]="!formulario.valid">
+                    Submit
+                </button>
+
+                <button type="button" class="btn btn-secondary" (click)="resetarFormulario()" style="margin-left: 2rem;">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+
+        <app-form-debug [form]="formulario"></app-form-debug>
+    </form>
+</div>
