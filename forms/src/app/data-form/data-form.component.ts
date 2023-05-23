@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, NgModel, Validators } from '@angular/forms';
 import { map } from 'rxjs';
 
 @Component({
@@ -20,13 +20,34 @@ export class DataFormComponent implements OnInit {
   ngOnInit(): void {
     
     this.formulario = this.formBuilder.group({
-      nome: [null],
-      email: [null]
+      nome: [null, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(120)
+      ]],
+      email: [null, [
+        Validators.required,
+        Validators.email
+      ]],
+      endereco: this.formBuilder.group({
+        cep: [null, Validators.required],
+        numero: [null, Validators.required],
+        complemento: [null, Validators.required],
+        rua: [null, Validators.required],
+        bairro: [null, Validators.required],
+        cidade: [null, Validators.required],
+        estado: [null, Validators.required]
+      })
     });
 
   }
 
   onSubmit() {
+    if (this.formulario.invalid) {
+      console.log(this.formulario);
+      return;
+    }
+    
     const param = this.formulario.getRawValue();
 
     this.http.post('http://httpbin.org/post', JSON.stringify(param))
@@ -49,6 +70,30 @@ export class DataFormComponent implements OnInit {
 
   resetarFormulario() {
     this.formulario.reset();
+  }
+
+  verificarValidTouched(campo: string, tipoErro: string = '') {
+
+    const campoForm = this.formulario.get(campo);
+
+    if (!this.validarIsNullUndefinedEmpty(tipoErro)) {
+      return campoForm?.invalid && campoForm?.touched && campoForm?.errors?.[tipoErro];
+    } else {
+      return campoForm?.invalid && campoForm?.touched;
+    }
+  }
+
+  validarIsNullUndefinedEmpty(valor: any) {
+    
+    if (typeof valor === 'string'){
+      return  valor === undefined || valor === null || valor.length === 0;
+    } else {
+      return valor === undefined || valor === null;
+    }
+  }
+
+  consultaCEP() {
+
   }
 
 }
