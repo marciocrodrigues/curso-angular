@@ -2,15 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgModel, Validators } from '@angular/forms';
 import { map } from 'rxjs';
+import { Endereco } from '../shared/models/endereco.model';
+import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 import { DropdownService } from '../shared/services/dropdown.service';
-
-class Endereco {
-  logradouro?: string;
-  bairro?: string;
-  cep: string;
-  localidade: string;
-  uf: string;
-}
 
 @Component({
   selector: 'app-data-form',
@@ -21,12 +15,11 @@ export class DataFormComponent implements OnInit {
 
   formulario: FormGroup;
 
-  viacep = '//viacep.com.br/ws/@cep/json/';
-
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private dropDownService: DropdownService
+    private dropDownService: DropdownService,
+    private cepService: ConsultaCepService
   ) { }
 
   ngOnInit(): void {
@@ -122,28 +115,22 @@ export class DataFormComponent implements OnInit {
   }
 
   consultaCEP() {
+    const cep = this.formulario.get('endereco.cep')?.value;
 
-    let cep = this.formulario.get('endereco.cep')!.value;
-    
-    cep = cep.replace(/\D/g, '');
-
-    if (cep !== '') {
-      const validacep = /^[0-9]{8}$/;
-
-      if (validacep.test(cep)) {
-        this.http.get<Endereco>(this.viacep.replace('@cep', cep))
-        .subscribe({
-          next: (data) => {
-            this.populaDadosForm(data);
-          },
-          error: (data) => {
-            this.resetarFormularioEndereco();
-            console.log(data);
-          },
-          complete: () => console.log('consulta finalizada!')
-        });
-      }
+    if (cep !== '' && cep !== undefined && cep !== null) {
+      this.cepService.consultarCep(cep)?.subscribe({
+        next: (data) => {
+          this.populaDadosForm(data);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+        complete: () => {
+          console.log('Consulta de cep finalizada');
+        }
+      })
     }
+    
   }
 
   populaDadosForm(dados: Endereco) {

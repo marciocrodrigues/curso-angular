@@ -25,7 +25,6 @@ import { DropdownService } from './services/dropdown.service';
     HttpClientModule,
     FormDebugComponent,
     CampoControlErroComponent
-  ],
-  providers: [ DropdownService ]
+  ]
 })
 export class SharedModule { }
